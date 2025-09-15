@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime
 
-vetDB = sqlite3.connect("veterinaryDatabase")
+vetDB = sqlite3.connect("veterinaryDatabase.db")
 cursor = vetDB.cursor()
 
 
@@ -268,8 +268,40 @@ def date_validation(date):
         formatted_date = 'ERROR'
     return formatted_date
 
+def print_all_dogs():
+    cursor.execute("SELECT * FROM dogs")
+    dogs = cursor.fetchall()
+    if not dogs:
+        print("No dogs found in the database.")
+    else:
+        print("\n--- All Dogs ---")
+        for dog in dogs:
+            print(f"ID: {dog[0]}, Name: {dog[1]}, Breed: {dog[2]}, Age: {dog[3]}, Chip: {dog[4]}, Last Checkup: {dog[5]}")
+
+def print_all_owners():
+    cursor.execute("SELECT * FROM owners")
+    owners = cursor.fetchall()
+    if not owners:
+        print("No owners found in the database.")
+    else:
+        print("\n--- All Owners ---")
+        for owner in owners:
+            print(f"OwnerID: {owner[0]}, Name: {owner[1]}, Location: {owner[2]}, DOB: {owner[3]}, Contact Number: {owner[4]}, Email: {owner[5]}")
+
+def print_all_dogOwners():
+    cursor.execute("SELECT * FROM dogOwner")
+    dogOwners = cursor.fetchall()
+    if not dogOwners:
+        print("No dog owners found in the database.")
+    else:
+        print("\n--- All Dog Owners ---")
+        for dogOwner in dogOwners:
+            print(f"DogID: {dogOwner[0]}, OwnerID: {dogOwner[1]}")
 
 def report():
+    print_all_dogs()
+    print_all_owners()
+    print_all_dogOwners()
     main_menu()
 
 
