@@ -102,7 +102,3 @@ CREATE TABLE dogOwner(
 ## License
 
 This project is for educational purposes.
-
----
-
-**Feel free to copy and use this README for your project!**
